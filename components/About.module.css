@@ -1,0 +1,394 @@
+/* ===== Header ===== */
+.header {
+  text-align: center;
+  margin-bottom: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.eyebrow {
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.eyebrowDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.title {
+  font-family: var(--font-heading);
+  font-size: clamp(2.4rem, 5vw, 3.4rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin-bottom: 16px;
+}
+
+.accent {
+  color: #a3e635;
+  font-style: italic;
+}
+
+.subtitle {
+  font-size: 1.02rem;
+  color: var(--text-secondary);
+  max-width: 420px;
+}
+
+/* ===== Timeline ===== */
+.timeline {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Vertical line */
+.line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--border);
+  transform: translateX(-50%);
+  z-index: 0;
+}
+
+.lineProgress {
+  width: 100%;
+  background: linear-gradient(to bottom, #a3e635, #e85d2c, #3d8b37, #f59e0b);
+  border-radius: 2px;
+}
+
+/* Step row */
+.step {
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  padding: 0 0 60px;
+  width: 50%;
+  padding-right: 48px;
+}
+
+.stepRight {
+  margin-left: 50%;
+  padding-right: 0;
+  padding-left: 48px;
+  justify-content: flex-start;
+}
+
+/* Dot on the center line */
+.dot {
+  position: absolute;
+  top: 28px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid;
+  background: var(--bg-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.step:not(.stepRight) .dot {
+  right: -9px;
+}
+
+.stepRight .dot {
+  left: -9px;
+}
+
+.dotInner {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+/* Card */
+.card {
+  padding: 32px 28px 28px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  transition: all 0.35s var(--ease-out-expo);
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-hover);
+  border-color: rgba(163, 230, 53, 0.12);
+}
+
+.cardTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.stepNum {
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+}
+
+.iconWrap {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s;
+}
+
+.card:hover .iconWrap {
+  transform: scale(1.1) rotate(-5deg);
+}
+
+.cardTitle {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  letter-spacing: -0.01em;
+}
+
+.cardDesc {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.cardAccent {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.card:hover .cardAccent {
+  opacity: 1;
+}
+
+/* ===== Final Centered Step ===== */
+.finalStep {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: -20px;
+  padding-top: 30px;
+  position: relative;
+}
+
+.finalDot {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 3px solid #a3e635;
+  background: var(--bg-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  margin-bottom: 28px;
+  position: relative;
+  box-shadow: 0 0 20px rgba(163, 230, 53, 0.3);
+}
+
+.finalDot::after {
+  content: '';
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #a3e635;
+}
+
+.finalCard {
+  position: relative;
+  max-width: 480px;
+  width: 100%;
+  padding: 44px 36px 40px;
+  background: var(--bg-card);
+  border: 1px solid rgba(163, 230, 53, 0.15);
+  border-radius: var(--radius-lg);
+  text-align: center;
+  transition: all 0.4s var(--ease-out-expo);
+  overflow: hidden;
+}
+
+.finalCard:hover {
+  border-color: rgba(163, 230, 53, 0.3);
+  box-shadow: 0 8px 40px rgba(163, 230, 53, 0.08), var(--shadow-hover);
+}
+
+.finalGlow {
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(163, 230, 53, 0.08), transparent 70%);
+  pointer-events: none;
+}
+
+.finalIconWrap {
+  width: 60px;
+  height: 60px;
+  border-radius: 16px;
+  background: rgba(163, 230, 53, 0.1);
+  color: #a3e635;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  transition: transform 0.3s;
+}
+
+.finalCard:hover .finalIconWrap {
+  transform: scale(1.1) rotate(-5deg);
+}
+
+.finalNum {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: #a3e635;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.finalTitle {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+  background: linear-gradient(135deg, #a3e635, #bef264);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.finalDesc {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.finalAccentLine {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #a3e635, transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.finalCard:hover .finalAccentLine {
+  opacity: 1;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .timeline {
+    padding-left: 32px;
+  }
+
+  .line {
+    left: 0;
+    transform: none;
+  }
+
+  .step,
+  .stepRight {
+    width: 100%;
+    margin-left: 0;
+    padding-left: 40px;
+    padding-right: 0;
+    justify-content: flex-start;
+  }
+
+  .step:not(.stepRight) .dot,
+  .stepRight .dot {
+    left: -9px;
+    right: auto;
+  }
+
+  .step {
+    padding-bottom: 40px;
+  }
+
+  .finalCard {
+    padding: 36px 28px 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .timeline {
+    padding-left: 24px;
+  }
+
+  .step,
+  .stepRight {
+    padding-left: 32px;
+  }
+
+  .card {
+    padding: 24px 22px 22px;
+  }
+
+  .header {
+    margin-bottom: 56px;
+  }
+
+  .step {
+    padding-bottom: 32px;
+  }
+
+  .finalCard {
+    padding: 28px 22px 24px;
+  }
+
+  .finalIconWrap {
+    width: 50px;
+    height: 50px;
+    border-radius: 14px;
+  }
+
+  .finalTitle {
+    font-size: 1.25rem;
+  }
+
+  .finalDesc {
+    font-size: 0.85rem;
+  }
+}
+

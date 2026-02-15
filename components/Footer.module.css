@@ -1,0 +1,335 @@
+.footer {
+  position: relative;
+}
+
+/* ===== CTA Banner — Redesigned ===== */
+.ctaSection {
+  padding: 0 0 var(--section-padding);
+}
+
+.ctaBanner {
+  position: relative;
+  background: linear-gradient(135deg, #0d2818 0%, #143d24 40%, #1a4a2e 70%, #0d2818 100%);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  padding: 80px 40px;
+  text-align: center;
+  border: 1px solid rgba(163, 230, 53, 0.08);
+}
+
+.ctaGlow {
+  position: absolute;
+  top: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(163, 230, 53, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(40px);
+}
+
+.ctaGlow2 {
+  position: absolute;
+  bottom: -60px;
+  right: -60px;
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, rgba(232, 93, 44, 0.08) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(30px);
+}
+
+.ctaGrid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  mask-image: radial-gradient(ellipse at 50% 50%, black 30%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 50%, black 30%, transparent 70%);
+}
+
+.ctaInner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.ctaIconWrap {
+  width: 64px;
+  height: 64px;
+  border-radius: 18px;
+  background: rgba(163, 230, 53, 0.1);
+  border: 1px solid rgba(163, 230, 53, 0.2);
+  color: #a3e635;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.ctaTitle {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.ctaAccent {
+  background: linear-gradient(135deg, #a3e635, #bef264);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-style: italic;
+}
+
+.ctaSub {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.5);
+  max-width: 420px;
+  line-height: 1.7;
+}
+
+.ctaBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 36px;
+  background: #a3e635;
+  color: #0d2818;
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 700;
+  border-radius: 60px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s var(--ease-out-expo);
+  text-decoration: none;
+  margin-top: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.ctaBtn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 40%, rgba(255, 255, 255, 0.25) 50%, transparent 60%);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.ctaBtn:hover::before {
+  transform: translateX(100%);
+}
+
+.ctaBtn:hover {
+  background: #bef264;
+  box-shadow: 0 8px 30px rgba(163, 230, 53, 0.3);
+}
+
+/* ===== Main Footer ===== */
+.main {
+  padding: 64px 0 40px;
+  border-top: 1px solid var(--border);
+}
+
+.mainInner {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+  gap: 48px;
+}
+
+.brandCol {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.logoDot {
+  color: var(--accent);
+  font-size: 1rem;
+}
+
+.brandDesc {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  max-width: 280px;
+}
+
+.socials {
+  display: flex;
+  gap: 10px;
+}
+
+.socialIcon {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  transition: all 0.3s;
+}
+
+.socialIcon:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(232, 93, 44, 0.06);
+}
+
+.linkCol {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.colTitle {
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.linkList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footerLink {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  transition: color 0.25s;
+}
+
+.footerLink:hover {
+  color: var(--accent);
+}
+
+.contactList {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.contactItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.contactIcon {
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+/* ===== Bottom Bar ===== */
+.bottom {
+  padding: 24px 0;
+  border-top: 1px solid var(--border);
+}
+
+.bottomInner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.copy {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.legal {
+  display: flex;
+  gap: 24px;
+}
+
+.legalLink {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  transition: color 0.25s;
+}
+
+.legalLink:hover {
+  color: var(--accent);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .mainInner {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .ctaBanner {
+    padding: 56px 28px;
+  }
+
+  .ctaTitle {
+    font-size: clamp(1.6rem, 6vw, 2.2rem);
+  }
+
+  .ctaSub {
+    font-size: 0.9rem;
+  }
+
+  .mainInner {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .bottomInner {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .ctaBanner {
+    padding: 44px 20px;
+  }
+
+  .ctaIconWrap {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+  }
+
+  .ctaBtn {
+    padding: 14px 28px;
+    font-size: 0.88rem;
+  }
+}
+

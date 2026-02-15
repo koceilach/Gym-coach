@@ -1,0 +1,287 @@
+/* ===== Header ===== */
+.header {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 56px;
+}
+
+.accent {
+  color: var(--accent, #a3e635);
+}
+
+.subtitle {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--text-secondary, rgba(255, 255, 255, 0.5));
+  margin-top: 16px;
+}
+
+/* ===== Grid ===== */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  max-width: 900px;
+  margin: 0 auto;
+  align-items: stretch;
+}
+
+/* ===== Cards ===== */
+.card {
+  background: var(--card-bg, rgba(255, 255, 255, 0.03));
+  border: 1px solid var(--card-border, rgba(255, 255, 255, 0.06));
+  border-radius: var(--radius-xl, 20px);
+  padding: 40px 36px;
+  transition: all 0.35s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  background: var(--card-bg-hover, rgba(255, 255, 255, 0.04));
+  border-color: var(--card-border-hover, rgba(255, 255, 255, 0.1));
+}
+
+.cardPositive {
+  border-top: 2px solid rgba(163, 230, 53, 0.35);
+}
+
+.cardNegative {
+  border-top: 2px solid rgba(239, 68, 68, 0.25);
+}
+
+/* ===== Card Header ===== */
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 32px;
+}
+
+.cardIconWrap {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: rgba(163, 230, 53, 0.1);
+  color: #a3e635;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.cardIconNeg {
+  background: rgba(239, 68, 68, 0.08);
+  color: #ef4444;
+}
+
+.cardTitle {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary, #ffffff);
+  margin: 0;
+}
+
+/* ===== List ===== */
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+}
+
+.listItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--text-secondary, rgba(255, 255, 255, 0.65));
+}
+
+.iconPositive {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(163, 230, 53, 0.1);
+  color: #a3e635;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.iconNegative {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(239, 68, 68, 0.08);
+  color: rgba(239, 68, 68, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* ===== CTA ===== */
+.ctaWrap {
+  text-align: center;
+  margin-top: 56px;
+}
+
+.ctaBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 40px;
+  background: var(--accent, #a3e635);
+  color: #0d2818;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1rem;
+  border-radius: 60px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.35s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.ctaBtn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 40%, rgba(255, 255, 255, 0.2) 50%, transparent 60%);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.ctaBtn:hover::before {
+  transform: translateX(100%);
+}
+
+.ctaBtn:hover {
+  background: #bef264;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(163, 230, 53, 0.25);
+}
+
+.ctaNote {
+  font-size: 0.8rem;
+  color: var(--text-muted, rgba(255, 255, 255, 0.35));
+  margin-top: 14px;
+}
+
+/* ===== Light Mode ===== */
+[data-theme="light"] .card {
+  background: #ffffff;
+  border-color: rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="light"] .card:hover {
+  background: #fafafa;
+  border-color: rgba(0, 0, 0, 0.12);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] .cardTitle {
+  color: #1a1a1a;
+}
+
+[data-theme="light"] .listItem {
+  color: #555555;
+}
+
+[data-theme="light"] .subtitle {
+  color: #666666;
+}
+
+[data-theme="light"] .ctaNote {
+  color: #888888;
+}
+
+[data-theme="light"] .cardIconWrap {
+  background: rgba(34, 140, 34, 0.08);
+  color: #228c22;
+}
+
+[data-theme="light"] .cardIconNeg {
+  background: rgba(220, 38, 38, 0.06);
+  color: #dc2626;
+}
+
+[data-theme="light"] .iconPositive {
+  background: rgba(34, 140, 34, 0.08);
+  color: #228c22;
+}
+
+[data-theme="light"] .iconNegative {
+  background: rgba(220, 38, 38, 0.06);
+  color: #dc2626;
+}
+
+[data-theme="light"] .cardPositive {
+  border-top-color: rgba(34, 140, 34, 0.4);
+}
+
+[data-theme="light"] .cardNegative {
+  border-top-color: rgba(220, 38, 38, 0.3);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .card {
+    padding: 32px 26px;
+  }
+
+  .header {
+    margin-bottom: 40px;
+  }
+
+  .ctaWrap {
+    margin-top: 40px;
+  }
+
+  .ctaBtn {
+    width: 100%;
+    justify-content: center;
+    padding: 16px 32px;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 28px 22px;
+  }
+
+  .cardHeader {
+    margin-bottom: 24px;
+  }
+
+  .list {
+    gap: 14px;
+  }
+
+  .listItem {
+    font-size: 0.85rem;
+  }
+
+  .ctaBtn {
+    padding: 14px 24px;
+    font-size: 0.9rem;
+  }
+}
