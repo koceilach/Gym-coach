@@ -1,28 +1,35 @@
 "use client";
+
 import { useRef } from "react";
-import { motion, useScroll, useTransform, useInView } from "framer-motion";
-import { Award, Target, Dumbbell, ArrowRight } from "lucide-react";
+import Image from "next/image";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import { ArrowRight, CheckCircle2, Brain, MessageSquare, LineChart } from "lucide-react";
 import { useLang } from "./LanguageProvider";
 import styles from "./Community.module.css";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 24 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.65, ease: [0.16, 1, 0.3, 1] },
+  },
+};
 
 export default function Community() {
   const { t } = useLang();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
-
+  const edgeIcons = [MessageSquare, LineChart, Brain];
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
   });
-
   const marqueeX = useTransform(scrollYProgress, [0, 1], ["0%", "-30%"]);
-
-  const highlightIcons = [Award, Target, Dumbbell];
 
   return (
     <>
-      {/* Scrolling text divider */}
-      <div className={styles.dividerWrap}>
+      <div className={styles.dividerWrap} aria-hidden="true">
         <motion.div className={styles.dividerTrack} style={{ x: marqueeX }}>
           {Array.from({ length: 4 }).map((_, i) => (
             <span key={i} className={styles.dividerText}>
@@ -33,62 +40,60 @@ export default function Community() {
         </motion.div>
       </div>
 
-      {/* Coach section */}
       <section className={styles.section} ref={ref} id="coach">
         <div className={`container ${styles.wrapper}`}>
-          {/* Image side */}
           <motion.div
             className={styles.imageCol}
-            initial={{ opacity: 0, x: -60, scale: 0.95 }}
-            animate={isInView ? { opacity: 1, x: 0, scale: 1 } : {}}
-            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            initial={{ opacity: 0, x: -40 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
           >
             <div className={styles.imageCard}>
-              <div className={styles.imagePlaceholder}>
-                <div className={styles.placeholderIcon}>👤</div>
-                <span className={styles.placeholderLabel}>{t.coach.placeholder}</span>
-              </div>
+              <Image
+                src="/coach.jpg"
+                alt="Coach"
+                fill
+                className={styles.coachImage}
+                sizes="(max-width: 1024px) 100vw, 42vw"
+                priority
+              />
+              <div className={styles.imageOverlay} />
 
-              {/* Floating badge */}
               <motion.div
                 className={styles.expBadge}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 12 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: 0.6, duration: 0.6 }}
+                transition={{ delay: 0.35, duration: 0.45 }}
               >
                 <span className={styles.expNumber}>{t.coach.expNumber}</span>
-                <span className={styles.expLabel}>{t.coach.expLabel.split('\n').map((line, i) => (
-                  <span key={i}>{line}{i === 0 && <br />}</span>
-                ))}</span>
+                <span className={styles.expLabel}>
+                  {t.coach.expLabel.split("\n").map((line, i) => (
+                    <span key={i}>
+                      {line}
+                      {i === 0 && <br />}
+                    </span>
+                  ))}
+                </span>
               </motion.div>
             </div>
-
-            {/* Decorative accent bar */}
-            <motion.div
-              className={styles.accentBar}
-              initial={{ scaleY: 0 }}
-              animate={isInView ? { scaleY: 1 } : {}}
-              transition={{ delay: 0.3, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            />
           </motion.div>
 
-          {/* Text side */}
           <div className={styles.textCol}>
             <motion.span
               className={styles.eyebrow}
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.1, duration: 0.6 }}
+              initial="hidden"
+              animate={isInView ? "visible" : "hidden"}
+              variants={fadeUp}
             >
-              <span className={styles.eyebrowDot} />
               {t.coach.eyebrow}
             </motion.span>
 
             <motion.h2
               className={styles.headline}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.2, duration: 0.7 }}
+              initial="hidden"
+              animate={isInView ? "visible" : "hidden"}
+              variants={fadeUp}
+              transition={{ delay: 0.08, duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
             >
               {t.coach.headline1}
               <br />
@@ -97,42 +102,89 @@ export default function Community() {
 
             <motion.p
               className={styles.bio}
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.35, duration: 0.6 }}
+              initial="hidden"
+              animate={isInView ? "visible" : "hidden"}
+              variants={fadeUp}
+              transition={{ delay: 0.16, duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
             >
               {t.coach.bio}
             </motion.p>
 
-            <motion.div
+            {t.coach.note ? (
+              <motion.div
+                className={styles.note}
+                initial="hidden"
+                animate={isInView ? "visible" : "hidden"}
+                variants={fadeUp}
+                transition={{ delay: 0.24, duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <p className={styles.noteLabel}>{t.coach.noteLabel}</p>
+                <p className={styles.noteText}>{t.coach.note}</p>
+              </motion.div>
+            ) : null}
+
+            <motion.ul
               className={styles.highlights}
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.45, duration: 0.6 }}
+              initial="hidden"
+              animate={isInView ? "visible" : "hidden"}
+              variants={fadeUp}
+              transition={{ delay: 0.3, duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
             >
-              {t.coach.highlights.map((label, i) => (
-                <motion.div
-                  key={i}
-                  className={styles.tag}
-                  whileHover={{ scale: 1.05, y: -2 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  {highlightIcons[i] && (() => { const Icon = highlightIcons[i]; return <Icon size={16} />; })()}
-                  <span>{label}</span>
-                </motion.div>
+              {t.coach.highlights.map((item, i) => (
+                <li key={i} className={styles.highlightItem}>
+                  <CheckCircle2 size={16} />
+                  <span>{item}</span>
+                </li>
               ))}
-            </motion.div>
+            </motion.ul>
+
+            {t.coach.edgeItems?.length ? (
+              <motion.div
+                className={styles.edgeBlock}
+                initial="hidden"
+                animate={isInView ? "visible" : "hidden"}
+                variants={fadeUp}
+                transition={{ delay: 0.34, duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <p className={styles.edgeTitle}>{t.coach.edgeTitle}</p>
+                <ul className={styles.edgeList}>
+                  {t.coach.edgeItems.map((item, i) => {
+                    const Icon = edgeIcons[i % edgeIcons.length];
+                    return (
+                      <li key={i} className={styles.edgeItem}>
+                        <span className={styles.edgeIcon}>
+                          <Icon size={16} />
+                        </span>
+                        <div className={styles.edgeContent}>
+                          <div className={styles.edgeTop}>
+                            <h3 className={styles.edgeItemTitle}>{item.title}</h3>
+                            {item.metric ? (
+                              <span className={styles.edgeMetric}>{item.metric}</span>
+                            ) : null}
+                          </div>
+                          <p className={styles.edgeDesc}>{item.desc}</p>
+                        </div>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </motion.div>
+            ) : null}
 
             <motion.button
               className={styles.ctaLink}
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.55, duration: 0.6 }}
-              whileHover={{ x: 4 }}
-              onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+              initial="hidden"
+              animate={isInView ? "visible" : "hidden"}
+              variants={fadeUp}
+              transition={{ delay: 0.38, duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+              whileHover={{ x: 2 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() =>
+                document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })
+              }
             >
               {t.coach.cta}
-              <ArrowRight size={18} />
+              <ArrowRight size={17} />
             </motion.button>
           </div>
         </div>

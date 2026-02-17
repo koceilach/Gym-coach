@@ -118,6 +118,8 @@
   margin-top: 8px;
   position: relative;
   overflow: hidden;
+  max-width: 100%;
+  text-align: center;
 }
 
 .ctaBtn::before {
@@ -183,6 +185,7 @@
 .socials {
   display: flex;
   gap: 10px;
+  flex-wrap: wrap;
 }
 
 .socialIcon {
@@ -240,7 +243,7 @@
 
 .contactItem {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 10px;
   font-size: 0.85rem;
   color: var(--text-secondary);
@@ -249,6 +252,13 @@
 .contactIcon {
   color: var(--accent);
   flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.contactItem span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 /* ===== Bottom Bar ===== */
@@ -266,21 +276,41 @@
 .copy {
   font-size: 0.8rem;
   color: var(--text-muted);
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .legal {
   display: flex;
   gap: 24px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .legalLink {
   font-size: 0.8rem;
   color: var(--text-muted);
   transition: color 0.25s;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .legalLink:hover {
   color: var(--accent);
+}
+
+.creditLink {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  opacity: 0.9;
+  transition: color 0.25s ease, opacity 0.25s ease;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.creditLink:hover {
+  color: var(--accent);
+  opacity: 1;
 }
 
 /* Responsive */
@@ -328,8 +358,14 @@
   }
 
   .ctaBtn {
-    padding: 14px 28px;
+    width: 100%;
+    justify-content: center;
+    padding: 14px 20px;
     font-size: 0.88rem;
+  }
+
+  .legal {
+    gap: 10px 14px;
   }
 }
 

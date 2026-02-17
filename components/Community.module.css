@@ -1,7 +1,6 @@
-/* ===== Scrolling Divider ===== */
 .dividerWrap {
   overflow: hidden;
-  padding: 28px 0;
+  padding: 20px 0;
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
   background: var(--bg-secondary);
@@ -15,292 +14,368 @@
 
 .dividerText {
   font-family: var(--font-heading);
-  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-size: clamp(1.9rem, 4vw, 3.6rem);
   font-weight: 900;
   letter-spacing: -0.02em;
   color: var(--text-primary);
-  opacity: 0.08;
+  opacity: 0.1;
   display: inline-flex;
   align-items: center;
-  gap: 0;
-  padding: 0 40px;
+  padding: 0 34px;
   user-select: none;
 }
 
 .dividerDot {
   color: var(--accent);
   opacity: 1;
-  font-size: 0.6em;
-  margin-left: 40px;
+  font-size: 0.48em;
+  margin-left: 22px;
 }
 
-/* ===== Coach Section ===== */
 .section {
-  padding: clamp(80px, 10vw, 140px) 0;
+  padding: clamp(78px, 10vw, 132px) 0;
 }
 
 .wrapper {
   display: grid;
-  grid-template-columns: 1fr 1.1fr;
-  gap: 80px;
+  grid-template-columns: 0.95fr 1.05fr;
+  gap: clamp(28px, 5vw, 72px);
   align-items: center;
 }
 
-/* Image Column */
 .imageCol {
   position: relative;
 }
 
 .imageCard {
   position: relative;
-  border-radius: var(--radius-xl);
   overflow: hidden;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border);
   aspect-ratio: 3 / 4;
-  max-height: 560px;
+  background: var(--bg-secondary);
 }
 
 .coachImage {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center 22%;
 }
 
-.imagePlaceholder {
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(145deg, #1c2e22, #0f1f15);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
+.imageOverlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(to top, rgba(10, 16, 12, 0.42) 0%, transparent 52%),
+    linear-gradient(to right, rgba(10, 16, 12, 0.28) 0%, transparent 40%);
 }
 
-.placeholderIcon {
-  font-size: 4rem;
-  opacity: 0.1;
-}
-
-.placeholderLabel {
-  font-family: var(--font-heading);
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.1);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-/* Floating experience badge */
 .expBadge {
   position: absolute;
-  bottom: 24px;
-  right: 24px;
-  display: flex;
+  left: 16px;
+  bottom: 16px;
+  display: inline-flex;
   align-items: center;
-  gap: 12px;
-  padding: 18px 22px;
-  background: rgba(15, 17, 16, 0.85);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: var(--radius-md);
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: rgba(14, 18, 16, 0.58);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
 }
 
 .expNumber {
   font-family: var(--font-heading);
-  font-size: 2rem;
+  font-size: 1.1rem;
   font-weight: 800;
-  color: #a3e635;
   line-height: 1;
+  color: #a3e635;
 }
 
 .expLabel {
-  font-size: 0.72rem;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.65);
-  line-height: 1.3;
-  text-transform: uppercase;
+  font-size: 0.62rem;
+  font-weight: 600;
+  line-height: 1.25;
   letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(246, 250, 238, 0.9);
 }
 
-/* Decorative accent bar */
-.accentBar {
-  position: absolute;
-  left: -16px;
-  top: 40px;
-  bottom: 60px;
-  width: 4px;
-  background: linear-gradient(to bottom, #a3e635, transparent);
-  border-radius: 4px;
-  transform-origin: top;
-}
-
-/* Text Column */
 .textCol {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
 }
 
 .eyebrow {
+  margin: 0;
   font-family: var(--font-heading);
   font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.2em;
+  font-weight: 700;
+  letter-spacing: 0.13em;
   text-transform: uppercase;
-  color: var(--text-muted);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.eyebrowDot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--accent);
+  color: var(--accent);
 }
 
 .headline {
+  margin: 0;
   font-family: var(--font-heading);
-  font-size: clamp(2.2rem, 4.5vw, 3.2rem);
+  font-size: clamp(2rem, 4.4vw, 3rem);
   font-weight: 800;
-  line-height: 1.1;
+  line-height: 1.08;
   letter-spacing: -0.03em;
-}
-
-.accent {
-  color: #a3e635;
-  font-style: italic;
-}
-
-.bio {
-  font-size: 1rem;
-  color: var(--text-secondary);
-  line-height: 1.8;
-  max-width: 480px;
-}
-
-/* Credential tags */
-.highlights {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 4px;
-}
-
-.tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 18px;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 60px;
-  font-size: 0.82rem;
-  font-weight: 500;
-  color: var(--text-secondary);
-  cursor: default;
-  transition: all 0.3s;
-}
-
-.tag svg {
-  color: #a3e635;
-}
-
-.tag:hover {
-  border-color: rgba(163, 230, 53, 0.25);
-  background: rgba(163, 230, 53, 0.04);
   color: var(--text-primary);
 }
 
-/* CTA link */
-.ctaLink {
+.accent {
+  color: var(--green);
+}
+
+.bio {
+  margin: 0;
+  max-width: 620px;
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+}
+
+.note {
+  margin-top: 2px;
+  padding: 12px 14px;
+  border-left: 3px solid rgba(163, 230, 53, 0.6);
+  background: linear-gradient(
+    130deg,
+    rgba(163, 230, 53, 0.07) 0%,
+    rgba(163, 230, 53, 0.02) 100%
+  );
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+.noteLabel {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--green);
+}
+
+.noteText {
+  margin: 4px 0 0;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.highlights {
+  margin: 2px 0 0;
+  display: grid;
+  gap: 9px;
+}
+
+.highlightItem {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--text-primary);
+}
+
+.highlightItem svg {
+  margin-top: 2px;
+  flex: 0 0 auto;
+  color: var(--green);
+}
+
+.edgeBlock {
+  margin-top: 6px;
+  padding-top: 10px;
+}
+
+.edgeTitle {
+  margin: 0 0 10px;
+  font-family: var(--font-heading);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.edgeList {
+  display: grid;
+  gap: 10px;
+}
+
+.edgeItem {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
+  padding: 10px 0;
+  border-top: 1px solid var(--border);
+}
+
+.edgeIcon {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  border: 1px solid rgba(163, 230, 53, 0.22);
+  background: rgba(163, 230, 53, 0.08);
+  color: var(--green);
   display: inline-flex;
   align-items: center;
+  justify-content: center;
+}
+
+.edgeContent {
+  min-width: 0;
+}
+
+.edgeTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
   gap: 10px;
-  padding: 14px 28px;
-  background: #a3e635;
-  color: #0d2818;
+  flex-wrap: wrap;
+}
+
+.edgeItemTitle {
+  margin: 0;
   font-family: var(--font-heading);
+  font-size: 0.98rem;
   font-weight: 700;
-  font-size: 0.9rem;
-  border-radius: 60px;
-  border: none;
-  cursor: pointer;
-  width: fit-content;
+  line-height: 1.25;
+  color: var(--text-primary);
+  min-width: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.edgeMetric {
+  flex: 0 0 auto;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(163, 230, 53, 0.28);
+  background: rgba(163, 230, 53, 0.08);
+  font-size: 0.67rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--green);
+}
+
+.edgeDesc {
+  margin: 4px 0 0;
+  font-size: 0.86rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+.ctaLink {
   margin-top: 8px;
-  transition: all 0.3s var(--ease-out-expo);
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 999px;
+  background: #a3e635;
+  color: #123825;
+  font-family: var(--font-heading);
+  font-size: 0.88rem;
+  font-weight: 700;
+  transition: transform 0.25s var(--ease-out-expo), box-shadow 0.25s var(--ease-out-expo),
+    background-color 0.25s var(--ease-out-expo);
 }
 
 .ctaLink:hover {
-  background: #bef264;
-  box-shadow: 0 6px 24px rgba(163, 230, 53, 0.25);
-  transform: translateY(-2px);
+  background: #c7f36d;
+  box-shadow: 0 10px 24px rgba(163, 230, 53, 0.22);
 }
 
-/* ===== Responsive ===== */
 @media (max-width: 1024px) {
   .wrapper {
-    gap: 48px;
+    grid-template-columns: 1fr;
+    gap: 34px;
   }
 
   .imageCard {
-    max-height: 480px;
+    aspect-ratio: 4 / 3;
+    max-height: 500px;
   }
 }
 
 @media (max-width: 768px) {
-  .wrapper {
-    grid-template-columns: 1fr;
-    gap: 40px;
+  .dividerText {
+    font-size: 1.7rem;
+    padding: 0 20px;
+  }
+
+  .section {
+    padding: 72px 0;
   }
 
   .imageCard {
     max-height: 420px;
-    aspect-ratio: 4 / 3;
   }
 
-  .accentBar {
-    display: none;
+  .textCol {
+    gap: 14px;
   }
 
-  .expBadge {
-    bottom: 16px;
-    right: 16px;
-    padding: 14px 18px;
+  .bio {
+    font-size: 0.95rem;
+    line-height: 1.72;
   }
 
-  .expNumber {
-    font-size: 1.5rem;
+  .highlightItem {
+    font-size: 0.86rem;
   }
 
-  .dividerText {
-    font-size: 2rem;
-    padding: 0 24px;
+  .edgeItemTitle {
+    font-size: 0.9rem;
+  }
+
+  .edgeDesc {
+    font-size: 0.83rem;
   }
 }
 
 @media (max-width: 480px) {
+  .dividerWrap {
+    padding: 14px 0;
+  }
+
+  .dividerText {
+    font-size: 1.35rem;
+    padding: 0 14px;
+  }
+
+  .dividerDot {
+    margin-left: 12px;
+  }
+
   .imageCard {
     max-height: 340px;
   }
 
-  .highlights {
-    gap: 8px;
+  .expBadge {
+    left: 10px;
+    bottom: 10px;
+    padding: 8px 10px;
   }
 
-  .tag {
-    padding: 8px 14px;
-    font-size: 0.75rem;
+  .expNumber {
+    font-size: 1rem;
   }
 
-  .dividerText {
-    font-size: 1.5rem;
-    padding: 0 16px;
-  }
-
-  .dividerDot {
-    margin-left: 16px;
+  .expLabel {
+    font-size: 0.58rem;
   }
 }

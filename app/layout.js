@@ -19,6 +19,11 @@ const inter = Inter({
 
 export const metadata = {
   title: "YOUMENE FITNESS | Coach Sportif Personnel & Coaching",
+  icons: {
+    icon: "/logo-youmene.jpeg",
+    shortcut: "/logo-youmene.jpeg",
+    apple: "/logo-youmene.jpeg",
+  },
   description:
     "Transformez votre corps et votre esprit avec un coaching personnel d'élite. Programmes d'entraînement personnalisés, guide nutritionnel et accompagnement 1-à-1 avec le coach certifié Youmene.",
   keywords: [
@@ -39,7 +44,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${outfit.variable} ${inter.variable}`} data-theme="light" suppressHydrationWarning>
+    <html lang="en" className={`${outfit.variable} ${inter.variable}`} data-theme="dark" suppressHydrationWarning>
       <body>
         <LanguageProvider>
           <ThemeProvider>{children}</ThemeProvider>

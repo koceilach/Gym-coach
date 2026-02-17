@@ -1,12 +1,23 @@
 "use client";
 import { useRef } from "react";
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
-import { Trophy, Users, Clock, Flame, ChevronDown } from "lucide-react";
+import {
+  Trophy,
+  Users,
+  Clock,
+  Flame,
+  ChevronDown,
+  Route,
+  HeartPulse,
+  ShieldCheck,
+} from "lucide-react";
 import { useLang } from "./LanguageProvider";
 import styles from "./Tagline.module.css";
 
 const statIcons = [Users, Trophy, Clock, Flame];
 const statColors = ["#a3e635", "#e85d2c", "#3d8b37", "#f59e0b"];
+const pillarIcons = [Route, HeartPulse, ShieldCheck];
+const pillarColors = ["#a3e635", "#e85d2c", "#3d8b37"];
 
 const marqueeWords = [
   "VITESSE", "FORCE", "AGILITÉ", "PUISSANCE", "ENDURANCE",
@@ -91,6 +102,15 @@ export default function Tagline() {
             <p className={styles.description}>
               {t.tagline.description}
             </p>
+            {t.tagline.proofs?.length ? (
+              <div className={styles.proofRow}>
+                {t.tagline.proofs.map((proof, i) => (
+                  <span key={i} className={styles.proofChip}>
+                    {proof}
+                  </span>
+                ))}
+              </div>
+            ) : null}
             <button className={styles.scrollBtn} onClick={scrollToNext}>
               {t.tagline.scrollBtn}
               <ChevronDown size={16} />
@@ -140,6 +160,37 @@ export default function Tagline() {
             );
           })}
         </motion.div>
+
+        {t.tagline.pillars?.length ? (
+          <motion.div
+            className={styles.pillarsGrid}
+            initial={{ opacity: 0, y: 40 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
+          >
+            {t.tagline.pillars.map((pillar, i) => {
+              const Icon = pillarIcons[i % pillarIcons.length];
+              const color = pillarColors[i % pillarColors.length];
+              return (
+                <motion.article
+                  key={i}
+                  className={styles.pillarCard}
+                  whileHover={{ y: -6, scale: 1.01 }}
+                  transition={{ duration: 0.25 }}
+                >
+                  <span
+                    className={styles.pillarIcon}
+                    style={{ background: `${color}1a`, color }}
+                  >
+                    <Icon size={18} />
+                  </span>
+                  <h3 className={styles.pillarTitle}>{pillar.title}</h3>
+                  <p className={styles.pillarDesc}>{pillar.desc}</p>
+                </motion.article>
+              );
+            })}
+          </motion.div>
+        ) : null}
       </div>
 
       {/* Decorative floating shapes */}

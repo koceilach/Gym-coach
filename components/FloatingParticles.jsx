@@ -7,90 +7,170 @@ export default function FloatingParticles() {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext("2d");
 
-    let width = window.innerWidth;
-    let height = window.innerHeight * 3; // Full page height approximation
-    let animationId;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return;
+    }
+
+    let width = 0;
+    let height = 0;
+    let dpr = 1;
+    let frameId = 0;
+
+    const isCoarsePointer =
+      window.matchMedia("(pointer: coarse)").matches || window.innerWidth < 768;
+
+    const pointer = { x: -9999, y: -9999, active: false };
+    const particleCount = Math.min(isCoarsePointer ? 26 : 56, Math.floor(window.innerWidth / 20));
+    const linkDistance = isCoarsePointer ? 90 : 140;
+
+    const lightColors = ["#a3e635", "#e85d2c", "#3d8b37", "#f59e0b"];
+    const darkColors = ["#a3e635", "#e85d2c", "#7ccf76", "#f59e0b"];
+
+    const getPalette = () =>
+      document.documentElement.dataset.theme === "dark" ? darkColors : lightColors;
+
+    let palette = getPalette();
+
+    const particles = Array.from({ length: particleCount }, () => ({
+      x: Math.random() * window.innerWidth,
+      y: Math.random() * window.innerHeight,
+      vx: (Math.random() - 0.5) * (isCoarsePointer ? 0.22 : 0.34),
+      vy: (Math.random() - 0.5) * (isCoarsePointer ? 0.2 : 0.3),
+      size: Math.random() * 2.1 + 0.8,
+      pulse: Math.random() * Math.PI * 2,
+      pulseSpeed: Math.random() * 0.018 + 0.006,
+      color: palette[Math.floor(Math.random() * palette.length)],
+    }));
+
+    const updateTheme = () => {
+      palette = getPalette();
+      particles.forEach((p) => {
+        p.color = palette[Math.floor(Math.random() * palette.length)];
+      });
+    };
 
     const resize = () => {
       width = window.innerWidth;
-      height = document.documentElement.scrollHeight || window.innerHeight * 3;
-      canvas.width = width;
-      canvas.height = height;
+      height = window.innerHeight;
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+      canvas.width = Math.floor(width * dpr);
+      canvas.height = Math.floor(height * dpr);
+      canvas.style.width = `${width}px`;
+      canvas.style.height = `${height}px`;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     };
 
-    resize();
-    window.addEventListener("resize", resize);
+    const onMouseMove = (e) => {
+      pointer.x = e.clientX;
+      pointer.y = e.clientY;
+      pointer.active = true;
+    };
 
-    const particleCount = Math.min(60, Math.floor(width / 25));
-    const particles = [];
-
-    const colors = [
-      "rgba(163, 230, 53, 0.15)",
-      "rgba(232, 93, 44, 0.1)",
-      "rgba(61, 139, 55, 0.12)",
-      "rgba(245, 158, 11, 0.08)",
-      "rgba(163, 230, 53, 0.06)",
-    ];
-
-    for (let i = 0; i < particleCount; i++) {
-      particles.push({
-        x: Math.random() * width,
-        y: Math.random() * height,
-        size: Math.random() * 3 + 1,
-        speedX: (Math.random() - 0.5) * 0.3,
-        speedY: (Math.random() - 0.5) * 0.15,
-        color: colors[Math.floor(Math.random() * colors.length)],
-        opacity: Math.random() * 0.5 + 0.1,
-        pulse: Math.random() * Math.PI * 2,
-        pulseSpeed: Math.random() * 0.02 + 0.005,
-      });
-    }
+    const onMouseLeave = () => {
+      pointer.active = false;
+      pointer.x = -9999;
+      pointer.y = -9999;
+    };
 
     const animate = () => {
       ctx.clearRect(0, 0, width, height);
 
-      particles.forEach((p) => {
+      for (let i = 0; i < particles.length; i += 1) {
+        const p = particles[i];
         p.pulse += p.pulseSpeed;
-        const currentOpacity = p.opacity * (0.5 + 0.5 * Math.sin(p.pulse));
-        
-        p.x += p.speedX;
-        p.y += p.speedY;
 
-        // Wrap around
-        if (p.x < -10) p.x = width + 10;
-        if (p.x > width + 10) p.x = -10;
-        if (p.y < -10) p.y = height + 10;
-        if (p.y > height + 10) p.y = -10;
+        if (pointer.active) {
+          const dx = pointer.x - p.x;
+          const dy = pointer.y - p.y;
+          const dist = Math.hypot(dx, dy) || 1;
 
-        // Glow effect
+          if (dist < 180) {
+            const force = (1 - dist / 180) * 0.025;
+            p.vx -= (dx / dist) * force;
+            p.vy -= (dy / dist) * force;
+          }
+        }
+
+        p.vx *= 0.992;
+        p.vy *= 0.992;
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < -30) p.x = width + 30;
+        if (p.x > width + 30) p.x = -30;
+        if (p.y < -30) p.y = height + 30;
+        if (p.y > height + 30) p.y = -30;
+
+        const pulseAlpha = 0.35 + (Math.sin(p.pulse) + 1) * 0.25;
+
+        const glow = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size * 6);
+        glow.addColorStop(0, `${p.color}66`);
+        glow.addColorStop(1, "transparent");
+
         ctx.beginPath();
-        const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size * 4);
-        gradient.addColorStop(0, p.color);
-        gradient.addColorStop(1, "transparent");
-        ctx.fillStyle = gradient;
-        ctx.globalAlpha = currentOpacity;
-        ctx.arc(p.x, p.y, p.size * 4, 0, Math.PI * 2);
+        ctx.fillStyle = glow;
+        ctx.globalAlpha = pulseAlpha;
+        ctx.arc(p.x, p.y, p.size * 6, 0, Math.PI * 2);
         ctx.fill();
 
-        // Core dot
         ctx.beginPath();
         ctx.fillStyle = p.color;
-        ctx.globalAlpha = currentOpacity * 1.5;
+        ctx.globalAlpha = Math.min(1, pulseAlpha + 0.2);
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
         ctx.fill();
-      });
+      }
+
+      if (!isCoarsePointer) {
+        for (let i = 0; i < particles.length; i += 1) {
+          for (let j = i + 1; j < particles.length; j += 1) {
+            const a = particles[i];
+            const b = particles[j];
+            const dx = a.x - b.x;
+            const dy = a.y - b.y;
+            const dist = Math.hypot(dx, dy);
+
+            if (dist < linkDistance) {
+              const alpha = (1 - dist / linkDistance) * 0.12;
+              ctx.beginPath();
+              ctx.strokeStyle = "rgba(255,255,255,0.45)";
+              ctx.globalAlpha = alpha;
+              ctx.lineWidth = 1;
+              ctx.moveTo(a.x, a.y);
+              ctx.lineTo(b.x, b.y);
+              ctx.stroke();
+            }
+          }
+        }
+      }
 
       ctx.globalAlpha = 1;
-      animationId = requestAnimationFrame(animate);
+      frameId = window.requestAnimationFrame(animate);
     };
 
+    const themeObserver = new MutationObserver(updateTheme);
+    themeObserver.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-theme"],
+    });
+
+    resize();
     animate();
 
+    window.addEventListener("resize", resize);
+    window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("mouseleave", onMouseLeave);
+
     return () => {
-      cancelAnimationFrame(animationId);
+      window.cancelAnimationFrame(frameId);
       window.removeEventListener("resize", resize);
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mouseleave", onMouseLeave);
+      themeObserver.disconnect();
     };
   }, []);
 
@@ -99,13 +179,12 @@ export default function FloatingParticles() {
       ref={canvasRef}
       style={{
         position: "fixed",
-        top: 0,
-        left: 0,
+        inset: 0,
         width: "100%",
         height: "100%",
         pointerEvents: "none",
-        zIndex: 0,
-        opacity: 0.6,
+        zIndex: -1,
+        opacity: 0.85,
       }}
     />
   );

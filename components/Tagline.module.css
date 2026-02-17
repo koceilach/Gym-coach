@@ -112,6 +112,25 @@
   max-width: 440px;
 }
 
+.proofRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.proofChip {
+  padding: 8px 12px;
+  border: 1px solid rgba(163, 230, 53, 0.25);
+  border-radius: 999px;
+  background: rgba(163, 230, 53, 0.07);
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--text-primary);
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
 .scrollBtn {
   display: inline-flex;
   align-items: center;
@@ -127,6 +146,9 @@
   cursor: pointer;
   transition: all 0.3s var(--ease-out-expo);
   width: fit-content;
+  max-width: 100%;
+  text-align: center;
+  line-height: 1.35;
 }
 
 .scrollBtn:hover {
@@ -149,6 +171,13 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
+}
+
+.pillarsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 22px;
 }
 
 .statCard {
@@ -216,6 +245,49 @@
   font-weight: 500;
 }
 
+.pillarCard {
+  border: 1px solid var(--border);
+  background: linear-gradient(
+    160deg,
+    rgba(255, 255, 255, 0.01) 0%,
+    rgba(255, 255, 255, 0.03) 100%
+  );
+  border-radius: var(--radius-md);
+  padding: 22px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: border-color 0.3s var(--ease-out-expo), box-shadow 0.3s var(--ease-out-expo);
+}
+
+.pillarCard:hover {
+  border-color: rgba(163, 230, 53, 0.18);
+  box-shadow: var(--shadow-hover);
+}
+
+.pillarIcon {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pillarTitle {
+  font-family: var(--font-heading);
+  font-size: 1.03rem;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.pillarDesc {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
 /* ===== Decorative Shapes ===== */
 .floatShape {
   position: absolute;
@@ -247,6 +319,10 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .pillarsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   .topRow {
     gap: 40px;
   }
@@ -270,6 +346,12 @@
   .statsGrid {
     grid-template-columns: 1fr 1fr;
     gap: 14px;
+  }
+
+  .pillarsGrid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin-top: 16px;
   }
 
   .statCard {
@@ -308,5 +390,10 @@
   .marqueeWord {
     font-size: 0.7rem;
     padding: 0 16px;
+  }
+
+  .scrollBtn {
+    width: 100%;
+    justify-content: center;
   }
 }

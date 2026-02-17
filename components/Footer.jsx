@@ -1,12 +1,29 @@
 "use client";
 import { motion } from "framer-motion";
-import { Facebook, Instagram, Twitter, Youtube, ArrowUpRight, MapPin, Phone, Mail, Zap } from "lucide-react";
+import { Facebook, Instagram, Music2, ArrowUpRight, MapPin, Phone, Mail, Zap } from "lucide-react";
 import { useLang } from "./LanguageProvider";
 import AnimatedSection from "./AnimatedSection";
 import styles from "./Footer.module.css";
 
 export default function Footer() {
   const { t } = useLang();
+  const socialLinks = [
+    {
+      href: "https://www.instagram.com/youmene_boxing?igsh=aGI3NGJobzd3M280&utm_source=qr",
+      label: "Instagram",
+      Icon: Instagram,
+    },
+    {
+      href: "https://www.facebook.com/share/18cv1bkHpR/?mibextid=wwXIfr",
+      label: "Facebook",
+      Icon: Facebook,
+    },
+    {
+      href: "https://www.tiktok.com/@youmene.boxing?_r=1&_t=ZS-940DwsIbIu5",
+      label: "TikTok",
+      Icon: Music2,
+    },
+  ];
 
   return (
     <footer className={styles.footer}>
@@ -60,8 +77,15 @@ export default function Footer() {
               {t.footer.brandDesc}
             </p>
             <div className={styles.socials}>
-              {[Facebook, Instagram, Twitter, Youtube].map((Icon, i) => (
-                <a key={i} href="#" className={styles.socialIcon} aria-label="Social">
+              {socialLinks.map(({ href, label, Icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  className={styles.socialIcon}
+                  aria-label={label}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <Icon size={18} />
                 </a>
               ))}
@@ -117,6 +141,14 @@ export default function Footer() {
           <div className={styles.legal}>
             <a href="#" className={styles.legalLink}>{t.footer.privacy}</a>
             <a href="#" className={styles.legalLink}>{t.footer.terms}</a>
+            <a
+              href="https://www.facebook.com/Kceela"
+              className={styles.creditLink}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              builded by koceila ch
+            </a>
           </div>
         </div>
       </div>
